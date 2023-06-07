@@ -1,0 +1,15 @@
+name: Test git and gitpython
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - run: |
+          git rev-parse master^0
+          python -m pip install gitpython
+          python -c 'import git; print(git.Repo().submodules)'
